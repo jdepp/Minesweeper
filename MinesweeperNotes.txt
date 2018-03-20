@@ -1,0 +1,21 @@
+Minesweeper Notes
+
+want to implement:
+
+- winner screen
+    - keep track of buttons pressed and complete game when all except bombs are pressed
+
+- play again option
+    - add a button to the side of grid guy that allows user to reset or play again
+ 
+- welcome UI
+    - asks for name, difficulty
+    
+- easy, medium, hard
+    - solve by using var n to increase or decrease range of random
+
+- bomb counter
+    - solve by an incrementing var every time bomb is made
+
+- database for high scores
+    - mysql
