@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,6 +22,7 @@ public class GridGui
 	private int buttonsClicked;
 	private int bombCount;
 	private int winningNumber;
+	private JLabel bombLabel = new JLabel();
 	
 	public GridGui(Environment e)
 	{
@@ -37,9 +40,12 @@ public class GridGui
 		createButtons();
 		addAction();
 		setNumberOfBombs();
+		updateBombCount();
+		
 		
 		/* sets winning number */
 		winningNumber = totalButtons - bombCount;
+		
 		
 		//f.pack();
 		f.setExtendedState(JFrame.MAXIMIZED_BOTH);						// sets frame to full screen
@@ -48,6 +54,19 @@ public class GridGui
 
 	}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * updates frame when bomb count drops
+	 */
+	public void updateBombCount()
+	{
+		bombLabel.setText("Bombs left: \n" + Integer.toString(bombCount) + "		");
+		bombLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+		f.add(bombLabel, "East");
+	}
+
+	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
@@ -121,16 +140,54 @@ public class GridGui
 				/* here if square contains a bomb */
 				if (temp)
 				{
-					buttons[r][c].addActionListener(new ActionListener() 
+					buttons[r][c].addMouseListener(new MouseListener() 
 					{ 
-						  public void actionPerformed(ActionEvent e) 
+						  public void mousePressed (MouseEvent e) 
 						  {
-							  buttons[row][col].setIcon(bomb);
-							  buttons[row][col].setEnabled(false);
 							  
-							  /* prints loser message */
-							  JOptionPane.showMessageDialog(null, "Loser!");
+							  /* here if right clicked */
+							  if (SwingUtilities.isRightMouseButton(e))							  
+							  {
+								  buttons[row][col].setText("Flagged");
+								  bombCount--;
+								  updateBombCount();
+							  }
+							  
+							  /* here if left clicked */
+							  else
+							  {
+								  /* prints loser message */
+								  buttons[row][col].setIcon(bomb);
+								  buttons[row][col].setEnabled(false);
+								  JOptionPane.showMessageDialog(null, "Loser!");
+							  }
 						  }
+
+
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
 					});
 				}
 				
