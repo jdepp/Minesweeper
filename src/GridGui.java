@@ -1,11 +1,8 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
+import java.awt.event.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 /**
  * GUI for the grid
@@ -76,6 +73,8 @@ public class GridGui
 	{
 		buttons = new JButton[rows][columns];
 		
+		Graphics g;
+		
 		/* loop to add each button to mainPanel */
 		for (int r = 0; r < rows; r++)
 		{
@@ -83,7 +82,8 @@ public class GridGui
 			{
 				buttons[r][c] = new JButton();
 				//buttons[r][c].setPreferredSize(new Dimension(30, 30));	// sets dimensions for button
-				
+								
+				buttons[r][c].setBorder(new LineBorder(Color.BLACK));
 				mainPanel.add(buttons[r][c]);
 				
 				totalButtons++;
