@@ -98,7 +98,7 @@ public class GridGui
 						  public void actionPerformed(ActionEvent e) 
 						  {
 							  buttons[row][col].setIcon(bomb);
-							  //buttons[row][col].setText("BOMB");
+							  buttons[row][col].setEnabled(false);
 						  }
 					});
 				}
@@ -113,6 +113,8 @@ public class GridGui
 						  public void actionPerformed(ActionEvent e) 
 						  {							  
 							  buttons[row][col].setText(Integer.toString(number)); 
+							  buttons[row][col].setFont(new Font("Arial", Font.PLAIN, 40));
+							  buttons[row][col].setEnabled(false);
 						  }
 					});
 				}
