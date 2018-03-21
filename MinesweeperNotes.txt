@@ -2,6 +2,9 @@ Minesweeper Notes
 
 want to implement:
 
+- flagging system
+    - place flag icon on button when right clicked
+
 - first button always shows number
     - first click can't result in a loss
 
