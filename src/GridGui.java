@@ -16,6 +16,10 @@ public class GridGui
 	private final Environment e;
 	private JButton[][] buttons;
 	private JPanel mainPanel;
+	private int totalButtons;
+	private int buttonsClicked;
+	private int bombCount;
+	private int winningNumber;
 	
 	public GridGui(Environment e)
 	{
@@ -32,6 +36,10 @@ public class GridGui
 		
 		createButtons();
 		addAction();
+		setNumberOfBombs();
+		
+		/* sets winning number */
+		winningNumber = totalButtons - bombCount;
 		
 		//f.pack();
 		f.setExtendedState(JFrame.MAXIMIZED_BOTH);						// sets frame to full screen
@@ -59,11 +67,31 @@ public class GridGui
 				
 				mainPanel.add(buttons[r][c]);
 				
+				totalButtons++;
 
 			}
 		}
 		
 		f.add(mainPanel, "Center");
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * sets the total number of bombs 
+	 */
+	public void setNumberOfBombs()
+	{
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < columns; c++)
+			{
+				if (e.getBomb(r, c))
+				{
+					bombCount++;
+				}
+			}
+		}
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,6 +127,9 @@ public class GridGui
 						  {
 							  buttons[row][col].setIcon(bomb);
 							  buttons[row][col].setEnabled(false);
+							  
+							  /* prints loser message */
+							  JOptionPane.showMessageDialog(null, "Loser!");
 						  }
 					});
 				}
@@ -115,6 +146,11 @@ public class GridGui
 							  buttons[row][col].setText(Integer.toString(number)); 
 							  buttons[row][col].setFont(new Font("Arial", Font.PLAIN, 40));
 							  buttons[row][col].setEnabled(false);
+							  buttonsClicked++;
+							  
+							  /* here if all number squares have been clicked */
+							  if (buttonsClicked == winningNumber)
+								  JOptionPane.showMessageDialog(null, "Winner!");
 						  }
 					});
 				}
@@ -123,15 +159,6 @@ public class GridGui
 			}
 		}
 	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public void showNumber(int r, int c)
-	{
-		
-	}
-	
-	
 	
 	
 }
