@@ -8,7 +8,7 @@ public class Square
 {
 	private boolean bomb;
 	private Random rand = new Random();
-	private int  n = rand.nextInt(3) + 1;
+	private int  n = rand.nextInt(5) + 1;
 	private int number = 0;
 
 	/**
@@ -16,10 +16,10 @@ public class Square
 	 */
 	public Square()
 	{
-		if (n <= 2)
-			bomb = false;
-		else
+		if (n == 5)
 			bomb = true;
+		else
+			bomb = false;
 	}
 
 	/**
