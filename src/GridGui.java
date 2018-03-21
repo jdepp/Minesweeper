@@ -82,8 +82,12 @@ public class GridGui
 			{
 				buttons[r][c] = new JButton();
 				//buttons[r][c].setPreferredSize(new Dimension(30, 30));	// sets dimensions for button
-								
+												
+				/* changes background color and border */
+				buttons[r][c].setBackground(Color.darkGray);
 				buttons[r][c].setBorder(new LineBorder(Color.BLACK));
+
+				
 				mainPanel.add(buttons[r][c]);
 				
 				totalButtons++;
@@ -158,7 +162,7 @@ public class GridGui
 							  {
 								  /* prints loser message */
 								  buttons[row][col].setIcon(bomb);
-								  buttons[row][col].setEnabled(false);
+								 // buttons[row][col].setEnabled(false);
 								  JOptionPane.showMessageDialog(null, "Loser!");
 							  }
 						  }
@@ -202,7 +206,12 @@ public class GridGui
 						  {							  
 							  buttons[row][col].setText(Integer.toString(number)); 
 							  buttons[row][col].setFont(new Font("Arial", Font.PLAIN, 40));
+							  
+							  /* changes color button and disables it */
+							  buttons[row][col].setOpaque(true);
 							  buttons[row][col].setEnabled(false);
+							  
+							  /* tracks winning */
 							  buttonsClicked++;
 							  
 							  /* here if all number squares have been clicked */
