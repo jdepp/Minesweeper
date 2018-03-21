@@ -2,6 +2,9 @@ Minesweeper Notes
 
 want to implement:
 
+- first button always shows number
+    - first click can't result in a loss
+
 - winner screen
     - keep track of buttons pressed and complete game when all except bombs are pressed
 
@@ -14,8 +17,9 @@ want to implement:
 - easy, medium, hard
     - solve by using var n to increase or decrease range of random
 
-- bomb counter
+- bomb counter label
     - solve by an incrementing var every time bomb is made
+    - show bomb counter as label in GridGui
 
 - database for high scores
     - mysql
