@@ -13,10 +13,6 @@ public class Runner
 		{
 			System.out.print("");
 		}
-
-		Environment e = new Environment(wg.getDifficulty());
-
-		GridGui gg = new GridGui(e);
 	}
 
 }
