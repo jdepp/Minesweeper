@@ -1,10 +1,10 @@
 /**
- * Generates the value of a square 
+ * Generates the value of a square
  */
 
 import java.util.*;
 
-public class Square 
+public class Square
 {
 	private boolean bomb;
 	private Random rand = new Random();
@@ -21,15 +21,15 @@ public class Square
 		else
 			bomb = true;
 	}
-	
+
 	/**
 	 * sets the number value
 	 */
 	public void setNumber()
 	{
-		this.number++;;
+		this.number++;
 	}
-	
+
 	/**
 	 * returns the number value
 	 */
@@ -37,7 +37,7 @@ public class Square
 	{
 		return number;
 	}
-	
+
 	/**
 	 *  returns bomb
 	 */

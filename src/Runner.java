@@ -2,7 +2,7 @@
  * Main method for Minesweeper
  */
 
-public class Runner 
+public class Runner
 {
 	public static void main(String[] args)
 	{
@@ -13,10 +13,10 @@ public class Runner
 		{
 			System.out.print("");
 		}
-		
+
 		Environment e = new Environment(wg.getDifficulty());
-		
+
 		GridGui gg = new GridGui(e);
 	}
-	
+
 }

@@ -1,25 +1,25 @@
 /**
  * mine environment
  */
-public class Environment 
+public class Environment
 {
 	private int rows;
 	private int columns;
 	private int difficulty;
 	private Square[][] grid;
-	
+
 	/*
 	 * constructor that saves difficulty and executes methods
 	 */
 	public Environment(int difficulty)
 	{
 		this.difficulty = difficulty;
-		
+
 		setDifficulty();
 		createGrid();
 		setsNumber();
 	}
-	
+
 	/*
 	 * method that sets difficulty - i.e. rows and columns based on value passed from WelcomeGui
 	 */
@@ -41,9 +41,9 @@ public class Environment
 			columns = 5;
 		}
 	}
-	
+
 	/*
-	 * creates squares based on rows and columns 
+	 * creates squares based on rows and columns
 	 */
 	public void createGrid()
 	{
@@ -58,7 +58,7 @@ public class Environment
 			}
 		}
 	}
-	
+
 	/**
 	 * returns bomb value of square for Square class
 	 */
@@ -66,83 +66,140 @@ public class Environment
 	{
 		return grid[r][c].getBomb();
 	}
-	
+
 	/**
-	 * creates number for square by determining where 
+	 * creates number for square by determining where
 	 * bombs are around it
 	 */
-	public void setsNumber()
-	{
-		int leftC;
-		int rightC;
-		int topR;
-		int bottomR;
-
-		for (int r = 0; r < rows; r++)
-		{
-			for (int c = 0; c < columns; c++)
-			{
-				// leftC
-				if (c != 0)
-					leftC = c - 1;
-				else
-					leftC = 0;
-				
-				// rightC
-				if (c == (columns - 1))
-					rightC = columns - 1;
-				else
-					rightC = c + 1;
-				
-				// bottomR
-				if (r == (rows - 1))
-					bottomR = rows - 1;
-				else
-					bottomR = r + 1;
-				
-				// topR
-				if (r != 0)
-					topR = r - 1;
-				else
-					topR = 0;
-					
-				// checks the column to the left
-				if (grid[r][rightC].getBomb())
-					grid[r][c].setNumber();
-				
-				// checks the column to the right
-				if (grid[r][leftC].getBomb())
-					grid[r][c].setNumber();
-				
-				// checks value directly below
-				if (grid[bottomR][c].getBomb())
-					grid[r][c].setNumber();
-				
-				// checks the value directly above
-				if (grid[topR][c].getBomb())
-					grid[r][c].setNumber();
-				
-				
-								
-				// checks the top right diagonal
-			//	if (grid[topR][rightC].getBomb())
-			//		grid[r][c].setNumber();
-				
-				// checks the top left diagonal
-			//	if (grid[topR][leftC].getBomb())
-			//		grid[r][c].setNumber();
-				
-				// checks the bottom left diagonal
-			//	if (grid[bottomR][leftC].getBomb())
-			//		grid[r][c].setNumber();
-				
-				// checks the bottom right diagonal
-			//	if (grid[bottomR][rightC].getBomb())
-			//		grid[r][c].setNumber();
+	public void setsNumber() {
+		for(int r = 0; r < rows; r++) {
+			for(int c = 0; c < columns; c++) {
+				if(checkRight(r,c))							grid[r][c].setNumber();
+				if(checkBottomRight(r,c))				grid[r][c].setNumber();
+				if(checkBottom(r,c))						grid[r][c].setNumber();
+				if(checkBottomLeft(r,c))				grid[r][c].setNumber();
+				if(checkLeft(r,c))							grid[r][c].setNumber();
+				if(checkTopLeft(r,c))						grid[r][c].setNumber();
+				if(checkTop(r,c))								grid[r][c].setNumber();
+				if(checkTopRight(r,c))					grid[r][c].setNumber();
 			}
 		}
 	}
-	
+
+	public boolean checkRight(int row, int col) {
+		if(col+1 < columns && grid[row][col+1].getBomb())  return true;
+		else   return false;
+	}
+
+  public boolean checkBottomRight(int row, int col) {
+		if(row+1 < rows && col+1 < columns && grid[row+1][col+1].getBomb())   return true;
+		else   return false;
+	}
+
+	public boolean checkBottom(int row, int col) {
+		if(row+1 < rows && grid[row+1][col].getBomb())   return true;
+		else   return false;
+	}
+
+  public boolean checkBottomLeft(int row, int col) {
+		if(row+1 < rows && col-1 >= 0 && grid[row+1][col-1].getBomb())   return true;
+		else   return false;
+	}
+
+	public boolean checkLeft(int row, int col) {
+		if(col-1 >= 0 && grid[row][col-1].getBomb())   return true;
+		else   return false;
+	}
+
+	public boolean checkTopLeft(int row, int col) {
+		if(row-1 >= 0 && col-1 >= 0 && grid[row-1][col-1].getBomb())   return true;
+		else   return false;
+	}
+
+	public boolean checkTop(int row, int col) {
+		if(row-1 >= 0 && grid[row-1][col].getBomb())   return true;
+		else   return false;
+	}
+
+	public boolean checkTopRight(int row, int col) {
+		if(row-1 >= 0 && col+1 < columns && grid[row-1][col+1].getBomb())   return true;
+		else   return false;
+	}
+
+
+
+	// public void setsNumber()
+	// {
+	// 	int leftC;
+	// 	int rightC;
+	// 	int topR;
+	// 	int bottomR;
+	//
+	// 	for (int r = 0; r < rows; r++)
+	// 	{
+	// 		for (int c = 0; c < columns; c++)
+	// 		{
+	// 			// leftC
+	// 			if (c != 0)
+	// 				leftC = c - 1;
+	// 			else
+	// 				leftC = 0;
+	//
+	// 			// rightC
+	// 			if (c == (columns - 1))
+	// 				rightC = columns - 1;
+	// 			else
+	// 				rightC = c + 1;
+	//
+	// 			// bottomR
+	// 			if (r == (rows - 1))
+	// 				bottomR = rows - 1;
+	// 			else
+	// 				bottomR = r + 1;
+	//
+	// 			// topR
+	// 			if (r != 0)
+	// 				topR = r - 1;
+	// 			else
+	// 				topR = 0;
+	//
+	// 			// checks the column to the left
+	// 			if (grid[r][rightC].getBomb())
+	// 				grid[r][c].setNumber();
+	//
+	// 			// checks the column to the right
+	// 			if (grid[r][leftC].getBomb())
+	// 				grid[r][c].setNumber();
+	//
+	// 			// checks value directly below
+	// 			if (grid[bottomR][c].getBomb())
+	// 				grid[r][c].setNumber();
+	//
+	// 			// checks the value directly above
+	// 			if (grid[topR][c].getBomb())
+	// 				grid[r][c].setNumber();
+	//
+	//
+	//
+	// 			// checks the top right diagonal
+	// 		//	if (grid[topR][rightC].getBomb())
+	// 		//		grid[r][c].setNumber();
+	//
+	// 			// checks the top left diagonal
+	// 		//	if (grid[topR][leftC].getBomb())
+	// 		//		grid[r][c].setNumber();
+	//
+	// 			// checks the bottom left diagonal
+	// 		//	if (grid[bottomR][leftC].getBomb())
+	// 		//		grid[r][c].setNumber();
+	//
+	// 			// checks the bottom right diagonal
+	// 		//	if (grid[bottomR][rightC].getBomb())
+	// 		//		grid[r][c].setNumber();
+	// 		}
+	// 	}
+	// }
+
 	/**
 	 * gets number of square
 	 */
@@ -150,12 +207,12 @@ public class Environment
 	{
 		return grid[r][c].getNumber();
 	}
-	
+
 	public int getRows()
 	{
 		return rows;
 	}
-	
+
 	public int getColumns()
 	{
 		return columns;
