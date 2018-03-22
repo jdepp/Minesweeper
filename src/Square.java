@@ -45,4 +45,12 @@ public class Square
 	{
 		return bomb;
 	}
+	
+	/** 
+	 * removes bomb
+	 */
+	public void difuseBomb()
+	{
+		bomb = false;
+	}
 }

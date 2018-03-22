@@ -126,6 +126,7 @@ public class GridGui
 	{
 		boolean temp;
 
+		/* bomb image */
 		ImageIcon bomb = new ImageIcon(new ImageIcon("bomb.jpg").getImage().getScaledInstance(150, 100, Image.SCALE_DEFAULT));
 
 		/* loops all squares to add actions */
@@ -146,17 +147,40 @@ public class GridGui
 				{
 					buttons[r][c].addMouseListener(new MouseListener()
 					{
-						  public void mousePressed (MouseEvent e)
+						  public void mousePressed (MouseEvent m)
 						  {
 
 							  /* here if right clicked */
-							  if (SwingUtilities.isRightMouseButton(e))
+							  if (SwingUtilities.isRightMouseButton(m))
 							  {
 								  buttons[row][col].setText("Flagged");
 								  bombCount--;
 								  updateBombCount();
 							  }
+							  
+							  /* here if user clicks a bomb as first click */
+							  else if (buttonsClicked == 0)
+							  {
+								  e.difuseBomb(row, col);
+								  
+								  buttons[row][col].setText(Integer.toString(number));
+								  buttons[row][col].setFont(new Font("Arial", Font.PLAIN, 40));
 
+								  /* changes color button and disables it */
+								  buttons[row][col].setOpaque(true);
+								  buttons[row][col].setEnabled(false);
+								  
+								 
+								  /* updates bomb label */
+								  bombCount--;
+								  updateBombCount();
+								  
+								  /* resets winning number */
+								  winningNumber = totalButtons - bombCount;
+								  
+								  buttonsClicked++;
+							  }
+							  
 							  /* here if left clicked */
 							  else
 							  {

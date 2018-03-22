@@ -20,6 +20,8 @@ public class Environment
 		setsNumber();
 	}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*
 	 * method that sets difficulty - i.e. rows and columns based on value passed from WelcomeGui
 	 */
@@ -42,6 +44,8 @@ public class Environment
 		}
 	}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*
 	 * creates squares based on rows and columns
 	 */
@@ -59,6 +63,8 @@ public class Environment
 		}
 	}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * returns bomb value of square for Square class
 	 */
@@ -66,6 +72,8 @@ public class Environment
 	{
 		return grid[r][c].getBomb();
 	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * creates number for square by determining where
@@ -85,6 +93,8 @@ public class Environment
 			}
 		}
 	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public boolean checkRight(int row, int col) {
 		if(col+1 < columns && grid[row][col+1].getBomb())  return true;
@@ -126,79 +136,7 @@ public class Environment
 		else   return false;
 	}
 
-
-
-	// public void setsNumber()
-	// {
-	// 	int leftC;
-	// 	int rightC;
-	// 	int topR;
-	// 	int bottomR;
-	//
-	// 	for (int r = 0; r < rows; r++)
-	// 	{
-	// 		for (int c = 0; c < columns; c++)
-	// 		{
-	// 			// leftC
-	// 			if (c != 0)
-	// 				leftC = c - 1;
-	// 			else
-	// 				leftC = 0;
-	//
-	// 			// rightC
-	// 			if (c == (columns - 1))
-	// 				rightC = columns - 1;
-	// 			else
-	// 				rightC = c + 1;
-	//
-	// 			// bottomR
-	// 			if (r == (rows - 1))
-	// 				bottomR = rows - 1;
-	// 			else
-	// 				bottomR = r + 1;
-	//
-	// 			// topR
-	// 			if (r != 0)
-	// 				topR = r - 1;
-	// 			else
-	// 				topR = 0;
-	//
-	// 			// checks the column to the left
-	// 			if (grid[r][rightC].getBomb())
-	// 				grid[r][c].setNumber();
-	//
-	// 			// checks the column to the right
-	// 			if (grid[r][leftC].getBomb())
-	// 				grid[r][c].setNumber();
-	//
-	// 			// checks value directly below
-	// 			if (grid[bottomR][c].getBomb())
-	// 				grid[r][c].setNumber();
-	//
-	// 			// checks the value directly above
-	// 			if (grid[topR][c].getBomb())
-	// 				grid[r][c].setNumber();
-	//
-	//
-	//
-	// 			// checks the top right diagonal
-	// 		//	if (grid[topR][rightC].getBomb())
-	// 		//		grid[r][c].setNumber();
-	//
-	// 			// checks the top left diagonal
-	// 		//	if (grid[topR][leftC].getBomb())
-	// 		//		grid[r][c].setNumber();
-	//
-	// 			// checks the bottom left diagonal
-	// 		//	if (grid[bottomR][leftC].getBomb())
-	// 		//		grid[r][c].setNumber();
-	//
-	// 			// checks the bottom right diagonal
-	// 		//	if (grid[bottomR][rightC].getBomb())
-	// 		//		grid[r][c].setNumber();
-	// 		}
-	// 	}
-	// }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * gets number of square
@@ -216,6 +154,16 @@ public class Environment
 	public int getColumns()
 	{
 		return columns;
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/* calls difuse bomb in square class */
+	public void difuseBomb(int r, int c)
+	{
+		grid[r][c].difuseBomb();
+		createGrid();
+		setsNumber();
 	}
 
 }
