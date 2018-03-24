@@ -21,6 +21,8 @@ public class GridGui
 	private int buttonsClicked;
 	private int bombCount;
 	private int winningNumber;
+	private int score = 0;
+	private JLabel scoreLabel = new JLabel();
 	private JLabel bombLabel = new JLabel();
 	private JLabel flagInfo = new JLabel("Right click to flag");
 	private JLabel infoHeader = new JLabel("Information: ");
@@ -43,6 +45,7 @@ public class GridGui
 		addAction();
 		setNumberOfBombs();
 		addInfoLabels();
+		updateScore();
 		updateBombCount();
 
 
@@ -72,6 +75,20 @@ public class GridGui
 		
 		f.add(infoPanel, "East");
 		
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
+	/**
+	 * updates frame when score increases
+	 */
+	public void updateScore()
+	{
+		scoreLabel.setText("Score: " + Integer.toString(score) + "		");
+		scoreLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+		infoPanel.add(scoreLabel);
+		f.add(infoPanel, "East");
 	}
 	
 
@@ -183,6 +200,7 @@ public class GridGui
 								  //buttons[row][col].setText("Flagged");
 								  buttons[row][col].setIcon(flag);
 								  bombCount--;
+								  updateScore();
 								  updateBombCount();
 							  }
 							  
@@ -266,6 +284,11 @@ public class GridGui
 
 							  /* tracks winning */
 							  buttonsClicked++;
+							  
+							  /* adds to score and updates panel */
+							  score += 10;
+							  updateScore();
+							  updateBombCount();
 
 							  /* here if all number squares have been clicked */
 							  if (buttonsClicked == winningNumber)
