@@ -10,6 +10,8 @@ import javax.swing.border.LineBorder;
 public class GridGui
 {
 	JFrame f = new JFrame();
+	private BorderLayout flow = new BorderLayout();
+	private GridLayout grid = new GridLayout(8,0);
 	private int rows;
 	private int columns;
 	private final Environment e;
@@ -20,11 +22,14 @@ public class GridGui
 	private int bombCount;
 	private int winningNumber;
 	private JLabel bombLabel = new JLabel();
+	private JLabel flagInfo = new JLabel("Right click to flag");
+	private JLabel infoHeader = new JLabel("Information: ");
+	private JPanel infoPanel = new JPanel(grid);
 
+	
 	public GridGui(Environment e)
 	{
-		BorderLayout fLayout = new BorderLayout();
-		f.setLayout(fLayout);
+		f.setLayout(flow);
 
 		this.e = e;
 		rows = e.getRows();
@@ -37,6 +42,7 @@ public class GridGui
 		createButtons();
 		addAction();
 		setNumberOfBombs();
+		addInfoLabels();
 		updateBombCount();
 
 
@@ -54,13 +60,32 @@ public class GridGui
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
+	 * adds info labels to panel
+	 */
+	public void addInfoLabels()
+	{
+		infoHeader.setFont(new Font("Arial", Font.PLAIN, 40));
+		flagInfo.setFont(new Font("Arial", Font.PLAIN, 40));
+		
+		infoPanel.add(infoHeader);
+		infoPanel.add(flagInfo);
+		
+		f.add(infoPanel, "East");
+		
+	}
+	
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
 	 * updates frame when bomb count drops
 	 */
 	public void updateBombCount()
 	{
 		bombLabel.setText("Bombs left: \n" + Integer.toString(bombCount) + "		");
 		bombLabel.setFont(new Font("Arial", Font.PLAIN, 40));
-		f.add(bombLabel, "East");
+		infoPanel.add(bombLabel);
+		f.add(infoPanel, "East");
 	}
 
 
