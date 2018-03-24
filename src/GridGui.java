@@ -153,6 +153,8 @@ public class GridGui
 
 		/* bomb image */
 		ImageIcon bomb = new ImageIcon(new ImageIcon("bomb.jpg").getImage().getScaledInstance(150, 100, Image.SCALE_DEFAULT));
+		ImageIcon flag = new ImageIcon(new ImageIcon("flag.jpg").getImage().getScaledInstance(250, 150, Image.SCALE_DEFAULT));
+
 
 		/* loops all squares to add actions */
 		for (int r = 0; r < rows; r++)
@@ -178,7 +180,8 @@ public class GridGui
 							  /* here if right clicked */
 							  if (SwingUtilities.isRightMouseButton(m))
 							  {
-								  buttons[row][col].setText("Flagged");
+								  //buttons[row][col].setText("Flagged");
+								  buttons[row][col].setIcon(flag);
 								  bombCount--;
 								  updateBombCount();
 							  }
